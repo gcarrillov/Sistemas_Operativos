@@ -1,0 +1,9 @@
+     0.000 ms T1 lee contador 0
+    50.178 ms T1 escribe contador 1
+    50.183 ms T1 lee a 100
+   100.444 ms T1 escribe a 40
+   100.447 ms T1 lee b 100
+   150.640 ms T1 escribe b 160
+   150.791 ms T2 lee contador 1
+   200.994 ms T2 escribe contador 2
+   200.999 ms T2 lee a 40

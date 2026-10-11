@@ -1,0 +1,14 @@
+protegida=False contador=1 a=-20 b=160 fallos=['contador', 'suma', 'limite']
+     0.000 ms T1 lee contador 0
+     0.058 ms T2 lee contador 0
+     0.064 ms T2 escribe contador 1
+     0.066 ms T2 lee a 100
+     0.081 ms T1 escribe contador 1
+     0.082 ms T1 lee a 100
+     0.092 ms T2 escribe a 40
+     0.092 ms T2 lee b 100
+     0.099 ms T1 escribe a -20
+     0.100 ms T1 lee b 100
+     0.105 ms T2 escribe b 160
+     0.139 ms T1 escribe b 160
+protegida=True contador=2 a=40 b=160 fallos=[]
