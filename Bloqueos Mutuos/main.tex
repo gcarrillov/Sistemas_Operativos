@@ -1,0 +1,371 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[top=2.6cm,bottom=2.6cm,left=2.9cm,right=2.9cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx,array,booktabs,multirow,float}
+\usepackage[table]{xcolor}
+\usepackage{tikz,eso-pic,titlesec,fancyhdr}
+\usepackage{newtxtext,amsmath,newtxmath,microtype,enumitem}
+\usepackage{hyperref,listings,tabularx}
+\usetikzlibrary{positioning,calc,shapes.geometric,arrows.meta,fit,backgrounds}
+\definecolor{unsaDark}{RGB}{80,8,20}
+\definecolor{unsaMain}{RGB}{120,18,35}
+\definecolor{unsaGold}{RGB}{181,137,54}
+\definecolor{textDark}{RGB}{32,32,35}
+\definecolor{textGray}{RGB}{92,92,98}
+\definecolor{softGray}{RGB}{245,245,246}
+\definecolor{warmWhite}{RGB}{253,251,247}
+\definecolor{lineGray}{RGB}{215,215,218}
+\definecolor{cpuBlue}{RGB}{28,90,140}
+\definecolor{ioTeal}{RGB}{27,120,110}
+\definecolor{warnRedBg}{RGB}{250,235,236}
+\definecolor{ioTealBg}{RGB}{230,244,242}
+\newcommand{\University}{Universidad Nacional de San Agustín de Arequipa}
+\newcommand{\Faculty}{Facultad de Ingeniería de Producción y Servicios}
+\newcommand{\School}{Escuela Profesional de Ingeniería de Sistemas}
+\newcommand{\Course}{Sistemas Operativos}
+\newcommand{\Teacher}{Norman Patrick Harvey Arce}
+\newcommand{\Semester}{VI}
+\newcommand{\AcademicPeriod}{2026-B}
+\newcommand{\City}{Arequipa -- Perú}
+\newcommand{\YearDocument}{2026}
+\newcommand{\LogoPath}{escudounsa.png}
+\newcommand{\SchoolLogoPath}{logotipoepis.png}
+\newcommand{\CoverLogo}[2]{\IfFileExists{#1}{\includegraphics[width=3.4cm,height=2.8cm,keepaspectratio]{#1}}{\begin{tikzpicture}\draw[rounded corners=4pt,color=lineGray] (0,0) rectangle (2.8,2.4);\node[align=center,text=textGray] at (1.4,1.2){LOGOTIPO\\[1mm]\textbf{#2}};\end{tikzpicture}}}
+\hypersetup{colorlinks=true,linkcolor=unsaMain,urlcolor=unsaMain,citecolor=unsaDark,pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}\linespread{1.06}
+\setlist[itemize]{leftmargin=1.6em,itemsep=3pt,topsep=5pt}
+\setlist[enumerate]{leftmargin=2em,itemsep=4pt,topsep=5pt}
+\titleformat{\section}{\fontsize{17}{21}\selectfont\bfseries\color{unsaDark}}{\thesection.}{0.7em}{}[\vspace{3pt}{\color{unsaGold}\titlerule[0.9pt]}]
+\titleformat{\subsection}{\fontsize{14}{17}\selectfont\bfseries\color{unsaMain}}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\fontsize{12}{15}\selectfont\bfseries\color{textDark}}{\thesubsubsection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{19pt}{10pt}
+\titlespacing*{\subsection}{0pt}{14pt}{6pt}
+\pagestyle{fancy}\fancyhf{}\setlength{\headheight}{26pt}
+\fancyhead[L]{\fontsize{8.5}{10}\selectfont\textcolor{unsaDark}{\textbf{UNSA}}}
+\fancyhead[C]{\fontsize{8.5}{10}\selectfont\textcolor{textGray}{\Course}}
+\fancyhead[R]{\fontsize{8.5}{10}\selectfont\textcolor{textGray}{\AcademicPeriod}}
+\fancyfoot[L]{\fontsize{8}{10}\selectfont\textcolor{textGray}{Escuela Profesional de Ingeniería de Sistemas}}
+\fancyfoot[R]{\fontsize{8.5}{10}\selectfont\textcolor{unsaMain}{\textbf{\thepage}}}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}
+\lstdefinestyle{pycode}{language=Python,basicstyle=\ttfamily\fontsize{7.3}{9.1}\selectfont,backgroundcolor=\color{softGray},frame=single,rulecolor=\color{lineGray},breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,keywordstyle=\color{cpuBlue}\bfseries,commentstyle=\color{textGray}\itshape,stringstyle=\color{ioTeal},numbers=left,numberstyle=\tiny\color{textGray},numbersep=5pt}
+\lstdefinestyle{console}{basicstyle=\ttfamily\small,backgroundcolor=\color{warmWhite},frame=single,rulecolor=\color{unsaGold},breaklines=true,columns=fullflexible,showstringspaces=false}
+\newcommand{\MakeCover}[4]{%
+\begin{titlepage}\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+\fill[warmWhite] (current page.south west) rectangle (current page.north east);
+\fill[unsaDark] (current page.south west) rectangle ([xshift=0.82cm]current page.north west);
+\fill[unsaMain] ([xshift=0.82cm]current page.south west) rectangle ([xshift=0.96cm]current page.north west);
+\draw[unsaGold,line width=.8pt] ([xshift=2.7cm,yshift=-1.35cm]current page.north west)--([xshift=7cm,yshift=-1.35cm]current page.north west);
+\end{tikzpicture}
+\vspace*{.4cm}
+\begin{minipage}{.48\textwidth}\CoverLogo{\LogoPath}{UNSA}\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}\raggedleft\CoverLogo{\SchoolLogoPath}{EPIS}\end{minipage}
+\vspace{.7cm}
+{\large\color{unsaMain}\bfseries\MakeUppercase{\University}\par}
+{\small\color{textGray}\Faculty\par\School\par}
+\vspace{.4cm}{\color{unsaGold}\rule{5cm}{.8pt}\par}
+\vspace{.6cm}{\Large\color{unsaMain}\bfseries\Course\par}
+{\small Semestre \Semester\ -- Periodo \AcademicPeriod\par}
+\vspace{.7cm}{\small\color{unsaGold}\bfseries #1\par}
+\vspace{.2cm}{\fontsize{25}{30}\selectfont\color{unsaDark}\bfseries #2\par}
+\vspace{.3cm}{\large\color{textGray}#3\par}
+\vspace{.5cm}{\color{unsaGold}\rule{.8\textwidth}{.8pt}\par}
+\vspace{.7cm}
+\begin{center}\begin{tikzpicture}\node[draw=lineGray,fill=white,rounded corners=4pt,inner sep=12pt,text width=.76\textwidth,align=center]{\color{unsaGold}\bfseries INFORME TÉCNICO\\[5pt]\color{textDark}#4};\end{tikzpicture}\end{center}
+\vfill
+\begin{minipage}{.56\textwidth}{\small\color{unsaGold}\bfseries AUTOR}\\[4pt]\textbf{Gustavo Alonso Carrillo Villalta}\end{minipage}\hfill
+\begin{minipage}{.36\textwidth}{\small\color{unsaGold}\bfseries DOCENTE}\\[4pt]\textbf{\Teacher}\end{minipage}
+\vspace{.5cm}
+\begin{minipage}{.48\textwidth}{\small\color{unsaGold}\bfseries PERIODO ACADÉMICO}\\[4pt]\textbf{\AcademicPeriod}\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}\raggedleft\City\\[3pt]{\Large\color{unsaDark}\bfseries\YearDocument}\end{minipage}
+\end{titlepage}}
+
+\begin{document}
+\MakeCover{PRÁCTICA DOMICILIARIA -- SEMANA 8}{Gestor seguro de recursos}{Algoritmo del banquero, secuencias seguras y solicitudes dinámicas}{Modelo de múltiples procesos y tipos de recursos con simulación, validación y comparación entre evitación y detección}
+\setcounter{page}{1}
+\section{Resumen}
+Se desarrolla un gestor de recursos en Python 3 basado en el algoritmo del banquero. El sistema recibe el total de recursos, la matriz de demanda máxima y la asignación actual. Calcula \texttt{Available} y \texttt{Need}, simula solicitudes en copias del estado y solo concede una solicitud si el estado resultante conserva una secuencia segura. Las solicitudes inválidas o inseguras no modifican el estado real. Se incluyen pruebas para secuencia segura, solicitud superior a \texttt{Need}, recursos no disponibles, matrices inválidas, liberación y consistencia.
+\section{Modelo del sistema}
+Hay $N$ procesos y $M$ tipos de recursos. Las matrices contienen cantidades enteras no negativas:
+\begin{itemize}
+\item \texttt{Max[i][j]}: demanda máxima declarada del proceso $i$ para el recurso $j$.
+\item \texttt{Allocation[i][j]}: unidades actualmente asignadas.
+\item $\texttt{Need}[i][j]=\texttt{Max}[i][j]-\texttt{Allocation}[i][j]$.
+\item \texttt{Total[j]}: número total de instancias existentes.
+\item $\texttt{Available}[j]=\texttt{Total}[j]-\sum_i\texttt{Allocation}[i][j]$.
+\end{itemize}
+\section{Invariantes y validación}
+\begin{enumerate}
+\item $0\leq Allocation[i][j]\leq Max[i][j]$.
+\item $Need[i][j]=Max[i][j]-Allocation[i][j]$.
+\item $Available[j]\geq 0$ y $Available[j]+\sum_i Allocation[i][j]=Total[j]$.
+\item Toda fila tiene $M$ columnas y ambas matrices tienen $N$ filas.
+\item Una solicitud se simula primero sobre copias. Si se rechaza o posterga, las matrices reales no cambian.
+\end{enumerate}
+El constructor rechaza dimensiones incompatibles, cantidades negativas, asignaciones mayores que el máximo y totales insuficientes. El método de solicitud valida proceso, vector, límites de \texttt{Need} y \texttt{Available} antes de simular.
+\section{Algoritmo de seguridad}
+Se inicializa \texttt{Work = Available} y \texttt{Finish[i] = false}. Se busca un proceso no finalizado cuya necesidad sea menor o igual que \texttt{Work}. Se simula su terminación liberando su asignación: \texttt{Work = Work + Allocation[i]} y \texttt{Finish[i] = true}. Se repite hasta no encontrar candidato. Si todos los valores de \texttt{Finish} son verdaderos, existe una secuencia segura.
+\begin{lstlisting}[style=console]
+Work = Available
+Finish = [False] * N
+while existe i con Finish[i] == False y Need[i] <= Work:
+    Work = Work + Allocation[i]
+    Finish[i] = True
+seguro = all(Finish)
+\end{lstlisting}
+El programa devuelve, para cada paso, el proceso elegido, \texttt{Work} antes y después, la asignación liberada y el vector \texttt{Finish}. Así se puede auditar la secuencia y no solo recibir una etiqueta de seguro/inseguro.
+\section{Solicitud dinámica}
+Para una solicitud $Request_i$ se aplica el siguiente orden:
+\begin{enumerate}
+\item Si $Request_i>Need_i$, se rechaza por exceder la demanda declarada.
+\item Si $Request_i>Available$, se posterga por falta de recursos libres.
+\item Se simula la asignación en copias de \texttt{Available}, \texttt{Allocation} y \texttt{Need}.
+\item Se ejecuta la prueba de seguridad sobre el estado simulado.
+\item Si existe secuencia segura, se confirma el estado; en caso contrario, se rechaza y el estado original permanece intacto.
+\end{enumerate}
+La distinción entre rechazar y postergar es importante: una solicitud puede ser legítima según \texttt{Need} pero no estar disponible en este momento. Una solicitud que cabe en \texttt{Available} puede ser rechazada si conduce a un estado inseguro.
+\newpage
+\section{Casos de prueba}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\linewidth}{p{1cm}X X}
+\toprule
+\textbf{ID} & \textbf{Entrada} & \textbf{Resultado esperado}\\\midrule
+T1 & Estado clásico con cinco procesos y tres recursos & Secuencia segura $\langle P_1,P_3,P_0,P_2,P_4\rangle$ usando índices desde cero.\\
+T2 & Request superior a Need & Rechazo y estado sin cambios.\\
+T3 & Request superior a Available pero dentro de Need & Postergación y estado sin cambios.\\
+T4 & Matrices incompatibles o Allocation mayor que Max & Error de validación.\\
+T5 & P4 solicita [3,3,0]: Request cabe en Need y Available & Rechazo porque el estado simulado no tiene secuencia segura.\\
+T6 & Liberación válida de recursos & Aumenta Available y Need, disminuye Allocation.\\
+T7 & Proceso inválido & Rechazo y estado sin cambios.\\
+\bottomrule
+\end{tabularx}\end{table}
+\subsection{Ejemplo clásico}
+Se usan los datos habituales de cinco procesos y tres tipos de recurso. El total es $(10,5,7)$; la asignación actual suma $(7,2,5)$, por lo que \texttt{Available} es $(3,3,2)$. La prueba de seguridad encuentra una secuencia de índices $[1,3,0,2,4]$, equivalente a $\langle P_1,P_3,P_0,P_2,P_4\rangle$. En cada paso, la asignación del proceso finalizado vuelve a \texttt{Work}.
+\section{Evitación frente a detección}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\linewidth}{p{2.6cm}X X}
+\toprule
+\textbf{Aspecto} & \textbf{Evitación (banquero)} & \textbf{Detección}\\\midrule
+Momento & Antes de confirmar cada solicitud & Después de permitir asignaciones, según la política de detección\\
+Información & Requiere demanda máxima declarada y estado actual & Usa asignaciones actuales y solicitudes pendientes; no requiere que toda demanda máxima sea conocida\\
+Decisión & No concede si el estado simulado es inseguro & Identifica procesos que no pueden finalizar con los recursos disponibles\\
+Costo & Una prueba de seguridad por solicitud candidata & Costo periódico o bajo demanda, dependiente del algoritmo y del estado\\
+Limitación & Puede aplazar solicitudes que serían completables en una evolución distinta; exige máximos fiables & Puede descubrir el problema después de que haya ocurrido y requiere política de recuperación\\
+\bottomrule
+\end{tabularx}\end{table}
+En el modelo de múltiples instancias, la detección usa \texttt{Available}, \texttt{Allocation} y \texttt{Request} pendientes, simulando liberaciones de procesos que pueden completarse. No es idéntica a la evitación: la evitación previene entrar en estados no seguros, mientras que la detección acepta el riesgo y busca identificar un bloqueo existente.
+\section{Pruebas y ejecución}
+\begin{lstlisting}[style=console]
+python3 --version
+python3 -m unittest -v
+\end{lstlisting}
+Las pruebas se encuentran en \texttt{test\_banquero.py}. Se comprueba que las operaciones rechazadas no alteran el estado. El archivo \texttt{banquero.py} también puede ejecutarse desde un intérprete importando \texttt{ejemplo\_clasico()}, llamando a \texttt{seguridad()} e inspeccionando el campo \texttt{pasos}.
+\section{Complejidad}
+En una prueba de seguridad se pueden buscar hasta $N$ procesos en cada iteración y realizar como máximo $N$ finalizaciones. Cada comparación vectorial cuesta $O(M)$; por tanto, una cota sencilla es $O(N^2M)$. Una solicitud dinámica añade la copia de matrices $O(NM)$ y una prueba de seguridad $O(N^2M)$, por lo que domina $O(N^2M)$. La memoria del modelo es $O(NM)$.
+\section{Limitaciones}
+El algoritmo supone que los máximos declarados son válidos y que los procesos liberan los recursos al finalizar. No representa prioridades, recursos no preemptibles con efectos externos, fallos de proceso ni costos de recuperación. Un estado inseguro no significa necesariamente que el sistema ya esté bloqueado: significa que no se puede garantizar la finalización para todas las demandas dentro del modelo.
+\section{Conclusiones}
+\begin{enumerate}
+\item \texttt{Need} se calcula como diferencia entre máximo y asignación actual.
+\item La existencia de recursos libres no basta: se debe probar la seguridad del estado resultante.
+\item Simular sobre copias permite rechazar solicitudes sin corromper el estado original.
+\item La evitación y la detección se distinguen por el momento de decisión y por la información requerida.
+\item Mostrar \texttt{Work}, \texttt{Finish} y la asignación liberada permite justificar una secuencia segura paso a paso.
+\end{enumerate}
+\section{Referencias}
+\begin{enumerate}
+\item A. Silberschatz, P. B. Galvin y G. Gagne, \emph{Operating System Concepts}, 10.\textsuperscript{a} ed. Hoboken, NJ: Wiley, 2018.
+\item A. S. Tanenbaum y H. Bos, \emph{Modern Operating Systems}, 4.\textsuperscript{a} ed. Boston, MA: Pearson, 2015.
+\item Python Software Foundation, ``unittest --- Unit testing framework''. Disponible en: \url{https://docs.python.org/3/library/unittest.html}.
+\end{enumerate}
+\appendix
+\section{Código fuente completo}
+\subsection{Implementación: \texttt{banquero.py}}
+\begin{lstlisting}[style=pycode]
+from copy import deepcopy
+
+class GestorBanquero:
+    def __init__(self, maximo, allocation, total):
+        self._validar_matrices(maximo, allocation, total)
+        self.maximo = deepcopy(maximo)
+        self.allocation = deepcopy(allocation)
+        self.total = list(total)
+        self.n = len(maximo)
+        self.m = len(total)
+        self.available = [self.total[j] - sum(self.allocation[i][j] for i in range(self.n))
+                          for j in range(self.m)]
+        self.need = [[self.maximo[i][j] - self.allocation[i][j] for j in range(self.m)]
+                     for i in range(self.n)]
+
+    @staticmethod
+    def _validar_matrices(maximo, allocation, total):
+        if not isinstance(total, list) or not total or any(type(x) is not int or x < 0 for x in total):
+            raise ValueError("total debe ser una lista no vacia de enteros no negativos")
+        if not isinstance(maximo, list) or not maximo or not isinstance(allocation, list):
+            raise ValueError("matrices no vacias requeridas")
+        if len(maximo) != len(allocation):
+            raise ValueError("Max y Allocation deben tener igual numero de procesos")
+        m = len(total)
+        for matriz in (maximo, allocation):
+            for fila in matriz:
+                if not isinstance(fila, list) or len(fila) != m:
+                    raise ValueError("dimensiones incompatibles")
+                if any(type(x) is not int or x < 0 for x in fila):
+                    raise ValueError("las matrices requieren enteros no negativos")
+        for i in range(len(maximo)):
+            for j in range(m):
+                if allocation[i][j] > maximo[i][j]:
+                    raise ValueError("Allocation no puede superar Max")
+        for j in range(m):
+            if sum(f[j] for f in allocation) > total[j]:
+                raise ValueError("Allocation total supera recursos existentes")
+            if any(maximo[i][j] > total[j] for i in range(len(maximo))):
+                raise ValueError("Max de un proceso supera el total existente")
+
+    def estado(self):
+        return {"Total": self.total[:], "Available": self.available[:],
+                "Max": deepcopy(self.maximo), "Allocation": deepcopy(self.allocation),
+                "Need": deepcopy(self.need)}
+
+    @staticmethod
+    def _menor_igual(a, b):
+        return all(x <= y for x, y in zip(a, b))
+
+    def seguridad(self, available=None, allocation=None, need=None):
+        work = list(self.available if available is None else available)
+        alloc = self.allocation if allocation is None else allocation
+        needs = self.need if need is None else need
+        finish = [False] * self.n
+        pasos = []
+        secuencia = []
+        while True:
+            elegido = None
+            for i in range(self.n):
+                if not finish[i] and self._menor_igual(needs[i], work):
+                    elegido = i
+                    break
+            if elegido is None:
+                break
+            antes = work[:]
+            work = [work[j] + alloc[elegido][j] for j in range(self.m)]
+            finish[elegido] = True
+            secuencia.append(elegido)
+            pasos.append({"proceso": elegido, "Work_antes": antes,
+                          "Allocation_liberada": alloc[elegido][:],
+                          "Work_despues": work[:], "Finish": finish[:]})
+        return {"seguro": all(finish), "secuencia": secuencia,
+                "Work_final": work, "Finish_final": finish, "pasos": pasos}
+
+    def solicitar(self, proceso, request):
+        # Todas las validaciones ocurren antes de mutar; las simulaciones usan copias.
+        if type(proceso) is not int or not 0 <= proceso < self.n:
+            return {"decision": "rechazada", "motivo": "proceso invalido"}
+        if not isinstance(request, list) or len(request) != self.m or any(type(x) is not int or x < 0 for x in request):
+            return {"decision": "rechazada", "motivo": "vector Request invalido"}
+        if not self._menor_igual(request, self.need[proceso]):
+            return {"decision": "rechazada", "motivo": "Request supera Need"}
+        if not self._menor_igual(request, self.available):
+            return {"decision": "postergada", "motivo": "recursos no disponibles"}
+        av = [self.available[j] - request[j] for j in range(self.m)]
+        al = deepcopy(self.allocation)
+        ne = deepcopy(self.need)
+        al[proceso] = [al[proceso][j] + request[j] for j in range(self.m)]
+        ne[proceso] = [ne[proceso][j] - request[j] for j in range(self.m)]
+        prueba = self.seguridad(av, al, ne)
+        if not prueba["seguro"]:
+            return {"decision": "rechazada", "motivo": "la asignacion produciria estado inseguro",
+                    "prueba": prueba}
+        self.available = av
+        self.allocation = al
+        self.need = ne
+        return {"decision": "concedida", "motivo": "el estado resultante es seguro",
+                "secuencia": prueba["secuencia"], "prueba": prueba}
+
+    def liberar(self, proceso, unidades):
+        if type(proceso) is not int or not 0 <= proceso < self.n:
+            raise ValueError("proceso invalido")
+        if not isinstance(unidades, list) or len(unidades) != self.m or any(type(x) is not int or x < 0 for x in unidades):
+            raise ValueError("vector de liberacion invalido")
+        if any(unidades[j] > self.allocation[proceso][j] for j in range(self.m)):
+            raise ValueError("no se puede liberar mas de lo asignado")
+        for j in range(self.m):
+            self.allocation[proceso][j] -= unidades[j]
+            self.available[j] += unidades[j]
+            self.need[proceso][j] += unidades[j]
+
+def ejemplo_clasico():
+    maximo = [[7,5,3],[3,2,2],[9,0,2],[2,2,2],[4,3,3]]
+    allocation = [[0,1,0],[2,0,0],[3,0,2],[2,1,1],[0,0,2]]
+    return GestorBanquero(maximo, allocation, [10,5,7])
+
+def ejemplo_solicitud_insegura():
+    # Caso clasico: P1 solicita [3,3,0]; solicitud <= Need y <= Available,
+    # pero la simulacion no conserva una secuencia segura.
+    g = GestorBanquero(
+        [[3,2],[1,2],[3,3]],
+        [[1,0],[0,1],[1,1]],
+        [3,3])
+    return g
+
+\end{lstlisting}
+\subsection{Pruebas automatizadas: \texttt{test\_banquero.py}}
+\begin{lstlisting}[style=pycode]
+import unittest
+from banquero import GestorBanquero, ejemplo_clasico, ejemplo_solicitud_insegura
+
+class TestBanquero(unittest.TestCase):
+    def test_estado_inicial_tiene_secuencia_segura(self):
+        g = ejemplo_clasico()
+        r = g.seguridad()
+        self.assertTrue(r["seguro"])
+        self.assertEqual(r["secuencia"], [1, 3, 0, 2, 4])
+
+    def test_request_superior_a_need_rechazada_sin_mutacion(self):
+        g = ejemplo_clasico()
+        antes = g.estado()
+        r = g.solicitar(1, [2, 0, 0])  # Need de P1 = [1,2,2]
+        self.assertEqual(r["decision"], "rechazada")
+        self.assertEqual(r["motivo"], "Request supera Need")
+        self.assertEqual(g.estado(), antes)
+
+    def test_request_superior_a_available_se_posterga(self):
+        g = ejemplo_clasico()
+        antes = g.estado()
+        r = g.solicitar(0, [4, 0, 0])
+        self.assertEqual(r["decision"], "postergada")
+        self.assertEqual(g.estado(), antes)
+
+    def test_solicitud_valida_pero_insegura(self):
+        g = ejemplo_clasico()
+        antes = g.estado()
+        # P4: Request [3,3,0] <= Need [4,3,1] y <= Available [3,3,2],
+        # pero el estado resultante no conserva una secuencia segura.
+        r = g.solicitar(4, [3, 3, 0])
+        self.assertEqual(r["decision"], "rechazada")
+        self.assertEqual(r["motivo"], "la asignacion produciria estado inseguro")
+        self.assertEqual(g.estado(), antes)
+
+    def test_datos_invalidos_no_alteran_estado(self):
+        g = ejemplo_clasico()
+        antes = g.estado()
+        r = g.solicitar(99, [1, 0, 0])
+        self.assertEqual(r["decision"], "rechazada")
+        self.assertEqual(g.estado(), antes)
+
+    def test_matrices_invalidas(self):
+        with self.assertRaises(ValueError):
+            GestorBanquero([[2, 1]], [[3, 0]], [3, 2])
+
+    def test_liberacion_actualiza_need_y_available(self):
+        g = ejemplo_clasico()
+        g.liberar(0, [0, 1, 0])
+        self.assertEqual(g.available, [3, 4, 2])
+        self.assertEqual(g.need[0], [7, 5, 3])
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+
+\end{lstlisting}
+\end{document}
