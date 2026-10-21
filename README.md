@@ -27,7 +27,6 @@
     <h1 style="font-weight:bold; font-size: 2em;">Curso completo de Sistemas Operativos</h1>
 </div>
 
-# Curso completo Sistemas Operativos
 
 ## Informes y entregables del curso
 
