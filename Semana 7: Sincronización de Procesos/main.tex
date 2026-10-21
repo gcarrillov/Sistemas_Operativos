@@ -1,0 +1,406 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[top=2.6cm,bottom=2.6cm,left=2.9cm,right=2.9cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx,array,booktabs,multirow,float}
+\usepackage[table]{xcolor}
+\usepackage{tikz,eso-pic,titlesec,fancyhdr}
+\usepackage{newtxtext,amsmath,newtxmath,microtype,enumitem}
+\usepackage{hyperref,listings,tabularx}
+\usetikzlibrary{positioning,calc,shapes.geometric,arrows.meta,fit,backgrounds}
+\definecolor{unsaDark}{RGB}{80,8,20}
+\definecolor{unsaMain}{RGB}{120,18,35}
+\definecolor{unsaGold}{RGB}{181,137,54}
+\definecolor{textDark}{RGB}{32,32,35}
+\definecolor{textGray}{RGB}{92,92,98}
+\definecolor{softGray}{RGB}{245,245,246}
+\definecolor{warmWhite}{RGB}{253,251,247}
+\definecolor{lineGray}{RGB}{215,215,218}
+\definecolor{cpuBlue}{RGB}{28,90,140}
+\definecolor{ioTeal}{RGB}{27,120,110}
+\definecolor{warnRedBg}{RGB}{250,235,236}
+\definecolor{ioTealBg}{RGB}{230,244,242}
+\newcommand{\University}{Universidad Nacional de San Agustín de Arequipa}
+\newcommand{\Faculty}{Facultad de Ingeniería de Producción y Servicios}
+\newcommand{\School}{Escuela Profesional de Ingeniería de Sistemas}
+\newcommand{\Course}{Sistemas Operativos}
+\newcommand{\Teacher}{Norman Patrick Harvey Arce}
+\newcommand{\Semester}{VI}
+\newcommand{\AcademicPeriod}{2026-B}
+\newcommand{\City}{Arequipa -- Perú}
+\newcommand{\YearDocument}{2026}
+\newcommand{\LogoPath}{escudounsa.png}
+\newcommand{\SchoolLogoPath}{logotipoepis.png}
+\newcommand{\CoverLogo}[2]{\IfFileExists{#1}{\includegraphics[width=3.4cm,height=2.8cm,keepaspectratio]{#1}}{\begin{tikzpicture}\draw[rounded corners=4pt,color=lineGray] (0,0) rectangle (2.8,2.4);\node[align=center,text=textGray] at (1.4,1.2){LOGOTIPO\\[1mm]\textbf{#2}};\end{tikzpicture}}}
+\hypersetup{colorlinks=true,linkcolor=unsaMain,urlcolor=unsaMain,citecolor=unsaDark,pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}\linespread{1.06}
+\setlist[itemize]{leftmargin=1.6em,itemsep=3pt,topsep=5pt}
+\setlist[enumerate]{leftmargin=2em,itemsep=4pt,topsep=5pt}
+\titleformat{\section}{\fontsize{17}{21}\selectfont\bfseries\color{unsaDark}}{\thesection.}{0.7em}{}[\vspace{3pt}{\color{unsaGold}\titlerule[0.9pt]}]
+\titleformat{\subsection}{\fontsize{14}{17}\selectfont\bfseries\color{unsaMain}}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\fontsize{12}{15}\selectfont\bfseries\color{textDark}}{\thesubsubsection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{19pt}{10pt}
+\titlespacing*{\subsection}{0pt}{14pt}{6pt}
+\pagestyle{fancy}\fancyhf{}\setlength{\headheight}{26pt}
+\fancyhead[L]{\fontsize{8.5}{10}\selectfont\textcolor{unsaDark}{\textbf{UNSA}}}
+\fancyhead[C]{\fontsize{8.5}{10}\selectfont\textcolor{textGray}{\Course}}
+\fancyhead[R]{\fontsize{8.5}{10}\selectfont\textcolor{textGray}{\AcademicPeriod}}
+\fancyfoot[L]{\fontsize{8}{10}\selectfont\textcolor{textGray}{Escuela Profesional de Ingeniería de Sistemas}}
+\fancyfoot[R]{\fontsize{8.5}{10}\selectfont\textcolor{unsaMain}{\textbf{\thepage}}}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}
+\lstdefinestyle{pycode}{language=Python,basicstyle=\ttfamily\fontsize{7.3}{9.1}\selectfont,backgroundcolor=\color{softGray},frame=single,rulecolor=\color{lineGray},breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,keywordstyle=\color{cpuBlue}\bfseries,commentstyle=\color{textGray}\itshape,stringstyle=\color{ioTeal},numbers=left,numberstyle=\tiny\color{textGray},numbersep=5pt}
+\lstdefinestyle{console}{basicstyle=\ttfamily\small,backgroundcolor=\color{warmWhite},frame=single,rulecolor=\color{unsaGold},breaklines=true,columns=fullflexible,showstringspaces=false}
+\newcommand{\MakeCover}[4]{%
+\begin{titlepage}\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+\fill[warmWhite] (current page.south west) rectangle (current page.north east);
+\fill[unsaDark] (current page.south west) rectangle ([xshift=0.82cm]current page.north west);
+\fill[unsaMain] ([xshift=0.82cm]current page.south west) rectangle ([xshift=0.96cm]current page.north west);
+\draw[unsaGold,line width=.8pt] ([xshift=2.7cm,yshift=-1.35cm]current page.north west)--([xshift=7cm,yshift=-1.35cm]current page.north west);
+\end{tikzpicture}
+\vspace*{.4cm}
+\begin{minipage}{.48\textwidth}\CoverLogo{\LogoPath}{UNSA}\end{minipage}\hfill
+\begin{minipage}{.48\textwidth}\raggedleft\CoverLogo{\SchoolLogoPath}{EPIS}\end{minipage}
+\vspace{.7cm}
+{\large\color{unsaMain}\bfseries\MakeUppercase{\University}\par}
+{\small\color{textGray}\Faculty\par\School\par}
+\vspace{.4cm}{\color{unsaGold}\rule{5cm}{.8pt}\par}
+\vspace{.6cm}{\Large\color{unsaMain}\bfseries\Course\par}
+{\small Semestre \Semester\ -- Periodo \AcademicPeriod\par}
+\vspace{.7cm}{\small\color{unsaGold}\bfseries #1\par}
+\vspace{.2cm}{\fontsize{25}{30}\selectfont\color{unsaDark}\bfseries #2\par}
+\vspace{.3cm}{\large\color{textGray}#3\par}
+\vspace{.5cm}{\color{unsaGold}\rule{.8\textwidth}{.8pt}\par}
+\vspace{.7cm}
+\begin{center}\begin{tikzpicture}\node[draw=lineGray,fill=white,rounded corners=4pt,inner sep=12pt,text width=.76\textwidth,align=center]{\color{unsaGold}\bfseries INFORME TÉCNICO\\[5pt]\color{textDark}#4};\end{tikzpicture}\end{center}
+\vfill
+\begin{minipage}{.56\textwidth}{\small\color{unsaGold}\bfseries AUTOR}\\[4pt]\textbf{Gustavo Alonso Carrillo Villalta}\end{minipage}\hfill
+\begin{minipage}{.36\textwidth}{\small\color{unsaGold}\bfseries DOCENTE}\\[4pt]\textbf{\Teacher}\end{minipage}
+\vspace{.5cm}
+\begin{minipage}{.48\textwidth}{\small\color{unsaGold}\bfseries PERIODO ACADÉMICO}\\[4pt]\textbf{\AcademicPeriod}\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}\raggedleft\City\\[3pt]{\Large\color{unsaDark}\bfseries\YearDocument}\end{minipage}
+\end{titlepage}}
+
+\begin{document}
+\MakeCover{PRÁCTICA DOMICILIARIA -- SEMANA 7}{Servicio concurrente de reservas}{Sincronización, exclusión mutua, espera con timeout y cancelación}{Servicio concurrente sobre $M$ recursos con ocho o más workers, invariantes, prueba de carrera y medición reproducible}
+\setcounter{page}{1}
+\section{Resumen}
+Se presenta un servicio concurrente de reservas implementado en Python 3. Cada recurso admite como máximo una reserva activa. El diseño permite consultar disponibilidad, reservar, cancelar, esperar con timeout y cerrar el servicio sin dejar workers bloqueados. Un mutex protege el estado y una variable de condición permite suspender a los solicitantes mientras el recurso está ocupado. El informe incluye una versión defectuosa cuyo intercalado se fuerza mediante una barrera, pruebas automatizadas y un generador de métricas. Los tiempos concretos dependen del equipo y se obtienen ejecutando los scripts incluidos; no se presuponen resultados medidos.
+\section{Problema y objetivos}
+El servicio administra $M$ recursos discretos. Múltiples threads pueden solicitar el mismo recurso, pero una reserva solo se concede si este se encuentra libre. Las operaciones sobre el estado compartido deben ser indivisibles desde el punto de vista de los demás workers. La implementación se ajusta a la distinción de la semana 7 entre exclusión mutua, progreso y espera acotada.
+\subsection{Requisitos funcionales}
+\begin{itemize}
+\item Consultar los recursos disponibles.
+\item Reservar un recurso libre sin duplicar la asignación.
+\item Cancelar una reserva existente y notificar a los que esperan.
+\item Esperar hasta que un recurso se libere, se alcance el timeout o se cierre el servicio.
+\item Cerrar el servicio y despertar a todos los esperadores.
+\item Registrar operaciones y duración de esperas.
+\end{itemize}
+\section{Modelo de estado e invariantes}
+Sea $R=\{0,\ldots,M-1\}$ el conjunto de recursos y $B$ el mapa de reservas activas. Cada entrada relaciona un recurso con un identificador de reserva único y un cliente.
+\begin{itemize}
+\item $I_1$: $0\leq |B|\leq M$.
+\item $I_2$: cada recurso aparece como máximo una vez en $B$.
+\item $I_3$: los identificadores de reserva activos son únicos.
+\item $I_4$: $disponibles=M-|B|$.
+\item $I_5$: después de cerrar, ningún nuevo intento de reserva obtiene éxito.
+\end{itemize}
+La transición crítica es comprobar disponibilidad y, dentro de la misma sección protegida, insertar la reserva y asignar su identificador. Cancelar elimina la reserva bajo el mismo lock y luego notifica a los esperadores.
+\section{Diseño de sincronización}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\linewidth}{p{3cm}X}
+\toprule
+\textbf{Primitiva} & \textbf{Justificación}\\\midrule
+\texttt{threading.Lock} & Protege el mapa, el contador de identificadores, el cierre y las métricas; evita que dos workers aprueben simultáneamente una misma reserva.\\
+\texttt{threading.Condition} & Asocia una condición al mismo lock. \texttt{wait(timeout)} libera el lock mientras espera y lo vuelve a adquirir antes de continuar.\\
+\texttt{notify\_all()} & Se usa tras cancelación o cierre. Cada worker vuelve a comprobar el predicado dentro de un bucle, porque un despertar no garantiza que el recurso siga libre.\\
+\bottomrule
+\end{tabularx}\end{table}
+No se usa un semáforo como sustituto del estado por recurso: el predicado verdadero es si el recurso está o no en el mapa de reservas. El timeout limita la duración de la espera de un solicitante, pero no sustituye la sincronización.
+\section{Implementación y ejecución}
+El archivo \texttt{reservas.py} contiene el servicio, la demostración defectuosa y la carga de ocho workers. El método \texttt{esperar\_y\_reservar} calcula una fecha límite monotónica y recalcula el tiempo restante después de cada despertar. Las entradas inválidas generan \texttt{ValueError}; las solicitudes que no pueden reservarse devuelven \texttt{None}.
+\begin{lstlisting}[style=console]
+python3 --version
+python3 -m unittest -v
+python3 reservas.py
+\end{lstlisting}
+\subsection{Terminación limpia}
+El método \texttt{cerrar()} cambia el estado bajo el lock y llama a \texttt{notify\_all()}. Los esperadores detectan el cierre y retornan. En el programa de pruebas, todos los threads se unen mediante \texttt{join}; por tanto, el proceso principal no abandona workers activos.
+\section{Carrera reproducible en la versión defectuosa}
+La clase \texttt{ServicioDefectuoso} separa la lectura de disponibilidad de la escritura y no protege la transición. Una barrera de dos participantes hace que ambos threads lean \texttt{ocupado=False} antes de que cualquiera escriba. Ambos devuelven éxito y el contador de reservas llega a dos aunque solo existe un recurso.
+\begin{lstlisting}[style=console]
+Carrera defectuosa (reservas aceptadas): 2
+\end{lstlisting}
+Este resultado es intencional y determinista para la demostración. En el servicio corregido, la comprobación y la escritura están dentro de la misma sección crítica, por lo que como máximo uno de los ocho workers puede obtener la reserva del único recurso.
+\section{Plan de pruebas}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\linewidth}{p{1.1cm}X X}
+\toprule
+\textbf{ID} & \textbf{Escenario} & \textbf{Resultado esperado}\\\midrule
+T1 & Ocho workers intentan reservar un recurso a la vez & Exactamente una reserva exitosa.\\
+T2 & Cancelar una reserva válida & El recurso vuelve a estar disponible.\\
+T3 & Espera con timeout mientras el recurso sigue ocupado & Retorna \texttt{None} al vencer el plazo y registra espera.\\
+T4 & Un worker espera y otro cancela & El esperador despierta y puede reservar.\\
+T5 & Cierre con un worker bloqueado en espera & El worker despierta y termina.\\
+T6 & Recurso fuera de rango o timeout negativo & Error controlado y estado sin cambios.\\
+T7 & Carrera defectuosa con barrera & Dos éxitos para un recurso; demuestra el fallo.\\
+\bottomrule
+\end{tabularx}\end{table}
+Las pruebas están implementadas en \texttt{test\_reservas.py}. Se ejecutan con \texttt{python3 -m unittest -v}. El test de carrera espera exactamente dos reservas defectuosas; los demás verifican las propiedades del servicio corregido.
+\section{Métricas de espera y rendimiento}
+El método \texttt{demo\_carga(8,100)} intenta 800 operaciones con ocho workers y cuatro recursos. Informa duración total, operaciones intentadas por segundo, número de operaciones por tipo, cantidad de muestras de espera y esperas media y máxima. Estas son métricas de una carga sintética, no una predicción del rendimiento de producción.
+\begin{lstlisting}[style=console]
+python3 reservas.py
+\end{lstlisting}
+Para comparar ejecuciones, registrar la versión de Python, sistema operativo, número de workers, número de recursos y repetir el comando varias veces. Reportar mediana y rango; no comparar cifras obtenidas con cargas distintas. El rendimiento depende de la contención, la planificación de threads y el hardware.
+\newpage
+\section{Complejidad y limitaciones}
+La consulta de disponibilidad cuesta $O(M)$; reservar un recurso mediante el mapa tiene costo promedio $O(1)$; cancelar cuesta $O(M)$ en esta implementación porque busca el identificador recorriendo las reservas. La memoria ocupada es $O(M)$. \texttt{notify\_all()} puede despertar a más workers de los necesarios; para cargas mayores podría usarse una condición por recurso. La solución no persiste reservas ante una caída ni autentica clientes; es un prototipo docente de sincronización.
+\section{Conclusiones}
+\begin{enumerate}
+\item La decisión de disponibilidad y la creación de la reserva deben pertenecer a una única sección crítica.
+\item El mutex conserva los invariantes; la condición permite esperar sin consumir CPU mediante espera activa.
+\item Los timeouts deben usar una fecha límite y un bucle que vuelva a comprobar el predicado.
+\item El cierre necesita notificar a todos los esperadores y comprobar que los workers finalicen.
+\item La carrera forzada evidencia por qué una comprobación aislada no impide reservas duplicadas.
+\end{enumerate}
+\section{Referencias}
+\begin{enumerate}
+\item A. Silberschatz, P. B. Galvin y G. Gagne, \emph{Operating System Concepts}, 10.\textsuperscript{a} ed. Hoboken, NJ: Wiley, 2018.
+\item Python Software Foundation, ``threading --- Thread-based parallelism''. Disponible en: \url{https://docs.python.org/3/library/threading.html}.
+\item Python Software Foundation, ``unittest --- Unit testing framework''. Disponible en: \url{https://docs.python.org/3/library/unittest.html}.
+\end{enumerate}
+\appendix
+\newpage
+\section{Código fuente completo}
+\subsection{Implementación: \texttt{reservas.py}}
+\begin{lstlisting}[style=pycode]
+import threading
+import time
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+
+class ServicioReservas:
+    """Servicio concurrente: cada recurso admite como maximo una reserva."""
+    def __init__(self, cantidad):
+        if not isinstance(cantidad, int) or cantidad <= 0:
+            raise ValueError("cantidad debe ser un entero positivo")
+        self.cantidad = cantidad
+        self.reservas = {}                 # recurso -> identificador de reserva
+        self._lock = threading.Lock()
+        self._cond = threading.Condition(self._lock)
+        self._cerrado = False
+        self._siguiente_id = 1
+        self._esperas = []
+        self._operaciones = Counter()
+
+    def _validar_recurso(self, recurso):
+        if not isinstance(recurso, int) or not 0 <= recurso < self.cantidad:
+            raise ValueError(f"recurso fuera de rango: {recurso}")
+
+    def consultar(self):
+        with self._lock:
+            self._operaciones["consulta"] += 1
+            return [i for i in range(self.cantidad) if i not in self.reservas]
+
+    def reservar(self, recurso, cliente):
+        self._validar_recurso(recurso)
+        with self._cond:
+            if self._cerrado:
+                return None
+            if recurso in self.reservas:
+                self._operaciones["rechazo_ocupado"] += 1
+                return None
+            reserva_id = self._siguiente_id
+            self._siguiente_id += 1
+            self.reservas[recurso] = (reserva_id, cliente)
+            self._operaciones["reserva"] += 1
+            self._comprobar_invariantes()
+            return reserva_id
+
+    def esperar_y_reservar(self, recurso, cliente, timeout):
+        self._validar_recurso(recurso)
+        if timeout is not None and timeout < 0:
+            raise ValueError("timeout no puede ser negativo")
+        inicio = time.perf_counter()
+        limite = None if timeout is None else inicio + timeout
+        with self._cond:
+            while recurso in self.reservas and not self._cerrado:
+                restante = None if limite is None else limite - time.perf_counter()
+                if restante is not None and restante <= 0:
+                    self._esperas.append(time.perf_counter() - inicio)
+                    self._operaciones["timeout"] += 1
+                    return None
+                self._cond.wait(restante)
+            self._esperas.append(time.perf_counter() - inicio)
+            if self._cerrado:
+                self._operaciones["cancelada_cierre"] += 1
+                return None
+            reserva_id = self._siguiente_id
+            self._siguiente_id += 1
+            self.reservas[recurso] = (reserva_id, cliente)
+            self._operaciones["reserva_tras_espera"] += 1
+            self._comprobar_invariantes()
+            return reserva_id
+
+    def cancelar(self, reserva_id):
+        with self._cond:
+            for recurso, dato in list(self.reservas.items()):
+                if dato[0] == reserva_id:
+                    del self.reservas[recurso]
+                    self._operaciones["cancelacion"] += 1
+                    self._comprobar_invariantes()
+                    self._cond.notify_all()
+                    return True
+            self._operaciones["cancelacion_no_encontrada"] += 1
+            return False
+
+    def cerrar(self):
+        with self._cond:
+            self._cerrado = True
+            self._cond.notify_all()
+
+    def estado(self):
+        with self._lock:
+            return {"capacidad": self.cantidad,
+                    "reservados": len(self.reservas),
+                    "disponibles": self.cantidad - len(self.reservas),
+                    "reservas": dict(self.reservas),
+                    "cerrado": self._cerrado}
+
+    def metricas(self):
+        with self._lock:
+            esperas = sorted(self._esperas)
+            n = len(esperas)
+            return {"operaciones": dict(self._operaciones),
+                    "muestras_espera": n,
+                    "espera_media_s": sum(esperas)/n if n else 0.0,
+                    "espera_max_s": max(esperas) if n else 0.0}
+
+    def _comprobar_invariantes(self):
+        assert 0 <= len(self.reservas) <= self.cantidad
+        assert len({x[0] for x in self.reservas.values()}) == len(self.reservas)
+        assert self.cantidad - len(self.reservas) >= 0
+
+
+# Demostracion defectuosa: lectura y escritura separadas sin exclusion mutua.
+class ServicioDefectuoso:
+    def __init__(self):
+        self.ocupado = False
+        self.reservas = 0
+    def reservar_con_barrera(self, barrera):
+        disponible = not self.ocupado
+        barrera.wait(timeout=2)
+        if disponible:
+            self.ocupado = True
+            self.reservas += 1
+            return True
+        return False
+
+def demo_carrera():
+    barrera = threading.Barrier(2)
+    servicio = ServicioDefectuoso()
+    resultados = []
+    def worker():
+        resultados.append(servicio.reservar_con_barrera(barrera))
+    ts = [threading.Thread(target=worker) for _ in range(2)]
+    for t in ts: t.start()
+    for t in ts: t.join()
+    return servicio.reservas, resultados
+
+def demo_carga(workers=8, operaciones_por_worker=100):
+    servicio = ServicioReservas(4)
+    inicio = time.perf_counter()
+    def worker(w):
+        for i in range(operaciones_por_worker):
+            recurso = (w + i) % 4
+            rid = servicio.reservar(recurso, f"W{w}")
+            if rid is not None:
+                servicio.cancelar(rid)
+            else:
+                servicio.consultar()
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        list(pool.map(worker, range(workers)))
+    duracion = time.perf_counter() - inicio
+    return {"workers": workers, "operaciones_intentadas": workers*operaciones_por_worker,
+            "duracion_s": duracion,
+            "ops_s": workers*operaciones_por_worker/duracion if duracion else 0,
+            "estado_final": servicio.estado(), "metricas": servicio.metricas()}
+
+if __name__ == "__main__":
+    print("Carrera defectuosa (reservas aceptadas):", demo_carrera()[0])
+    print("Carga concurrente:", demo_carga())
+
+\end{lstlisting}
+\subsection{Pruebas automatizadas: \texttt{test\_reservas.py}}
+\begin{lstlisting}[style=pycode]
+import threading
+import unittest
+from reservas import ServicioReservas, demo_carrera
+
+class TestReservas(unittest.TestCase):
+    def test_no_doble_reserva(self):
+        s = ServicioReservas(1)
+        barrera = threading.Barrier(8)
+        resultados = []
+        def w(i):
+            barrera.wait()
+            resultados.append(s.reservar(0, f"W{i}"))
+        ts = [threading.Thread(target=w, args=(i,)) for i in range(8)]
+        for t in ts: t.start()
+        for t in ts: t.join()
+        self.assertEqual(sum(x is not None for x in resultados), 1)
+        self.assertEqual(s.estado()["reservados"], 1)
+
+    def test_cancelacion_libera_recurso(self):
+        s = ServicioReservas(1)
+        rid = s.reservar(0, "A")
+        self.assertTrue(s.cancelar(rid))
+        self.assertEqual(s.consultar(), [0])
+
+    def test_timeout(self):
+        s = ServicioReservas(1)
+        s.reservar(0, "A")
+        self.assertIsNone(s.esperar_y_reservar(0, "B", 0.02))
+        self.assertGreaterEqual(s.metricas()["espera_max_s"], 0.01)
+
+    def test_espera_se_despierta_tras_cancelar(self):
+        s = ServicioReservas(1)
+        rid = s.reservar(0, "A")
+        resultado = []
+        t = threading.Thread(target=lambda: resultado.append(s.esperar_y_reservar(0, "B", 1.0)))
+        t.start()
+        s.cancelar(rid)
+        t.join(1.5)
+        self.assertFalse(t.is_alive())
+        self.assertIsNotNone(resultado[0])
+
+    def test_cierre_despierta_esperadores(self):
+        s = ServicioReservas(1)
+        s.reservar(0, "A")
+        resultado = []
+        t = threading.Thread(target=lambda: resultado.append(s.esperar_y_reservar(0, "B", 5))
+        )
+        t.start()
+        s.cerrar()
+        t.join(1)
+        self.assertFalse(t.is_alive())
+        self.assertIsNone(resultado[0])
+
+    def test_datos_invalidos(self):
+        s = ServicioReservas(2)
+        with self.assertRaises(ValueError): s.reservar(4, "A")
+        with self.assertRaises(ValueError): s.esperar_y_reservar(0, "B", -1)
+        self.assertEqual(s.estado()["reservados"], 0)
+
+    def test_carrera_defectuosa_reproducible(self):
+        reservas, _ = demo_carrera()
+        self.assertEqual(reservas, 2)
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+
+\end{lstlisting}
+\end{document}
