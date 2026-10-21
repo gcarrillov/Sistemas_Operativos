@@ -39,6 +39,8 @@ Repositorio principal: [Sistemas_Operativos](https://github.com/gcarrillov/Siste
 | Semana | Práctica / Tarea | Tema | Presentado en |
 | :--- | :--- | :--- | :--- |
 | Semana 6 | [descripcion concurrencia](#concurrencia) | Concurrencia y Threads | [Concurrencia](https://github.com/gcarrillov/Sistemas_Operativos/tree/7ddaef59b1b8a0acbc2bf45541262280760ab61e/Concurrencia) |
+| Semana 7 | [descripcion sincronizacion](#sincronización-de-procesos) | Sincronización de Procesos | [Sincronización de Procesos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%207%3A%20Sincronizaci%C3%B3n%20de%20Procesos) |
+| Semana 8 | [descripcion bloqueos mutuos](#bloqueos-mutuos) | Bloqueos Mutuos | [Bloqueos Mutuos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%208%3A%20Bloqueos%20Mutuos) |
 
 1. [Equipo y Recursos Varios](#equipo-y-recursos-varios)
 
@@ -65,6 +67,40 @@ Esta práctica estudia cómo varias ejecuciones comparten tiempo, memoria y recu
 La carpeta incluye el código fuente, los resultados de las corridas, el informe en LaTeX y un README propio que explica cómo ejecutarlo.
 
 **Para detallar en el desarrollo ingresar a [Concurrencia](https://github.com/gcarrillov/Sistemas_Operativos/tree/7ddaef59b1b8a0acbc2bf45541262280760ab61e/Concurrencia)**
+
+### Sincronización de Procesos
+Semana 7 · Unidad II · Capítulo IV
+
+Esta práctica explora los mecanismos de sincronización de procesos y el control de acceso a la sección crítica mediante la implementación de un sistema de reservas concurrentes. Se evalúa la protección de recursos compartidos para evitar condiciones de carrera, inconsistencias de estado y sobre-reservas (*overbooking*). Entre los puntos principales se trabajó en:
+
+- Exclusión mutua en la sección crítica: uso de primitivas de sincronización (`Lock`, `Semaphore` y `Condition`) para garantizar el acceso seguro a la consulta y actualización de disponibilidad.
+
+- Sincronización condicional: gestión de procesos en espera activa o suspendida cuando se agotan los cupos, notificando adecuadamente tras la liberación de recursos.
+
+- Verificación de invariantes: preservación de los límites del sistema garantizando que el número de reservas $R$ y la capacidad máxima $C$ cumplan en todo momento $0 \le R \le C$.
+
+- Pruebas automatizadas: ejecución de casos de prueba con `unittest` para verificar que la consistencia del sistema se mantiene intacta bajo alta concurrencia.
+
+La carpeta incluye el código ejecutable (`reservas.py`), pruebas unitarias (`test_reservas.py`), registros en `resultados/`, el informe en LaTeX (`main.tex`) y su README con instrucciones.
+
+**Para detallar en el desarrollo ingresar a [Sincronización de Procesos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%207%3A%20Sincronizaci%C3%B3n%20de%20Procesos)**
+
+### Bloqueos Mutuos
+Semana 8 · Unidad II · Capítulo V
+
+Esta práctica aborda el problema de los bloqueos mutuos (*deadlocks*) en entornos multiproceso y la prevención de estados inseguros mediante el Algoritmo del Banquero de Dijkstra. Se modela la asignación y liberación de recursos de manera segura. Entre los puntos principales se trabajó en:
+
+- Modelado matricial de recursos: representación formal del estado del sistema mediante vectores y matrices de Disponibles ($A$), Máximos ($M$), Asignados ($C$) y Necesidad ($N$).
+
+- Algoritmo de seguridad: determinación de secuencias seguras de ejecución que garantizan que todos los procesos puedan finalizar sin caer en interbloqueo.
+
+- Simulación y prevención: validación previa a la asignación de peticiones para evitar la transición a estados inseguros.
+
+- Verificación automatizada: suite de pruebas unitarias con `unittest` para comprobar la detección de *deadlocks* y el funcionamiento correcto del simulador.
+
+La carpeta incluye la implementación principal (`banquero.py`), pruebas automatizadas (`test_banquero.py`), trazas de ejecución, el informe en LaTeX (`main.tex`) listo para Overleaf y un README explicativo.
+
+**Para detallar en el desarrollo ingresar a [Bloqueos Mutuos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%208%3A%20Bloqueos%20Mutuos)**
 
 ### Próximas prácticas
 Las siguientes tareas se agregarán como nuevas carpetas enlazadas en este mismo repositorio y se actualizará el índice.
