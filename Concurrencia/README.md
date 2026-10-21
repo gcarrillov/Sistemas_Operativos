@@ -1,4 +1,4 @@
-# Laboratorio Semana 6: condicion de carrera y reparacion controlada
+# Semana 6: condicion de carrera y reparacion controlada
 
 Sistemas Operativos - UNSA - 2026-B
 
