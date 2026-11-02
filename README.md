@@ -41,9 +41,11 @@ Repositorio principal: [Sistemas_Operativos](https://github.com/gcarrillov/Siste
 | Semana 6 | [descripcion concurrencia](#concurrencia) | Concurrencia y Threads | [Concurrencia](https://github.com/gcarrillov/Sistemas_Operativos/tree/7ddaef59b1b8a0acbc2bf45541262280760ab61e/Concurrencia) |
 | Semana 7 | [descripcion sincronizacion](#sincronización-de-procesos) | Sincronización de Procesos | [Sincronización de Procesos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%207%3A%20Sincronizaci%C3%B3n%20de%20Procesos) |
 | Semana 8 | [descripcion bloqueos mutuos](#bloqueos-mutuos) | Bloqueos Mutuos | [Bloqueos Mutuos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%208%3A%20Bloqueos%20Mutuos) |
+| Semana 9 | [descripcion almacenamiento y E/S](#almacenamiento-y-es) | Almacenamiento y E/S | [Almacenamiento y E/S](https://github.com/gcarrillov/Sistemas_Operativos/tree/3c8df464f1b3f63f11273a65b35e4b3aa77f9bfb/Semana%209%20-%20Alamacenamiento%20y%20E..S) |
+
+
 
 1. [Equipo y Recursos Varios](#equipo-y-recursos-varios)
-
 
 # Prácticas y Tareas
 
@@ -101,6 +103,23 @@ Esta práctica aborda el problema de los bloqueos mutuos (*deadlocks*) en entorn
 La carpeta incluye la implementación principal (`banquero.py`), pruebas automatizadas (`test_banquero.py`), trazas de ejecución, el informe en LaTeX (`main.tex`) listo para Overleaf y un README explicativo.
 
 **Para detallar en el desarrollo ingresar a [Bloqueos Mutuos](https://github.com/gcarrillov/Sistemas_Operativos/tree/14172c37b9ef96bff8d49bce56625acd261949f1/Semana%208%3A%20Bloqueos%20Mutuos)**
+
+### Almacenamiento y E/S
+
+Semana 9 · Unidad II · Capítulo VI
+
+Esta práctica desarrolla una utilidad de copia de archivos verificable y observable, orientada a garantizar la integridad de los datos durante las operaciones de entrada y salida (E/S). Se implementa un mecanismo de copia con tamaño de bloque configurable que gestiona lecturas y escrituras parciales, falta de espacio y cancelaciones, evitando que un error deje el archivo de destino en un estado inválido. Entre los puntos principales se trabajó en:
+
+- **Copia por bloques:** implementación de una utilidad que permite configurar el tamaño de los bloques de transferencia y analizar su efecto en el rendimiento.
+- **Integridad de los datos:** cálculo y verificación de hashes SHA-256, junto con la comprobación del tamaño del archivo para detectar inconsistencias durante la copia.
+- **Escrituras completas:** gestión de escrituras parciales mediante reintentos hasta completar la transferencia de cada bloque.
+- **Sincronización y persistencia:** uso de `fsync` para sincronizar los datos y del reemplazo atómico mediante `os.replace` para preservar el destino anterior ante errores.
+- **Observabilidad:** generación de reportes de progreso con intervalos configurables y control de la ejecución mediante opciones de línea de comandos.
+- **Pruebas y experimentación:** pruebas automatizadas con `unittest` y mediciones del rendimiento utilizando distintos tamaños de bloque, evaluando el efecto de `fsync` y la caché.
+
+La carpeta incluye la implementación principal (`copiador.py`), pruebas automatizadas (`test_copiador.py`), el script de medición (`medir.py`), resultados experimentales en `resultados/`, el informe en LaTeX (`informe.tex`) listo para Overleaf y un README con instrucciones de ejecución.
+
+**Para detallar en el desarrollo ingresar a [Almacenamiento y E/S](https://github.com/gcarrillov/Sistemas_Operativos/tree/3c8df464f1b3f63f11273a65b35e4b3aa77f9bfb/Semana%209%20-%20Alamacenamiento%20y%20E..S)**
 
 ### Próximas prácticas
 Las siguientes tareas se agregarán como nuevas carpetas enlazadas en este mismo repositorio y se actualizará el índice.
