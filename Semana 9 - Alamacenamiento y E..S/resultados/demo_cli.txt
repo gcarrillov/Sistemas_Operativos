@@ -1,0 +1,19 @@
+$ python3 copiador.py grande.bin copia.bin --bloque 64k --intervalo 0.1
+22609920/67108864 bytes (33.7%)
+44498944/67108864 bytes (66.3%)
+67108864/67108864 bytes (100.0%)
+bytes=67108864 sha256=baf892493c7f456643eacac8d23cf16e25a48ba19f440a6bb6094d5d4e184f83
+lecturas=1024 (cortas=0) escrituras=1024 (parciales=0)
+t_copia=0.2774 t_fsync=0.0515 t_verificacion=0.2174
+
+$ python3 copiador.py grande.bin salida.bin --bloque 4k   (ctrl+c a los 0.15 s)
+codigo de salida: 130
+25710592/67108864 bytes (38.3%)
+cancelado: destino intacto y temporal eliminado
+contenido de salida.bin: viejo
+temporales restantes: 0
+
+$ python3 copiador.py grande.bin noexiste/x.bin
+
+error: [Errno 2] No such file or directory: '/tmp/demo/noexiste' (destino intacto y temporal eliminado)
+codigo de salida: 1

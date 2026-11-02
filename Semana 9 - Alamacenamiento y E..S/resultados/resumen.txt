@@ -1,0 +1,22 @@
+a) tres tamanos de bloque (128 MiB, fsync, origen caliente, mediana de 5)
+bloque=    4096 lecturas= 32768 escrituras= 32768 t_copia=0.5214 t_fsync=0.1607 t_verif=0.4846 t_total=1.1630 mib_s_copia=245 mib_s_total=110
+bloque=   65536 lecturas=  2048 escrituras=  2048 t_copia=0.4993 t_fsync=0.1130 t_verif=0.4494 t_total=1.0811 mib_s_copia=256 mib_s_total=118
+bloque= 1048576 lecturas=   128 escrituras=   128 t_copia=0.4345 t_fsync=0.1159 t_verif=0.4189 t_total=0.9792 mib_s_copia=295 mib_s_total=131
+
+b) efecto de fsync (bloque 65536, mediana de 5)
+fsync=0 t_copia=0.4375 t_fsync=0.0000 t_verif=0.3692 t_total=0.8055
+fsync=1 t_copia=0.4253 t_fsync=0.1192 t_verif=0.4300 t_total=0.9746
+
+c) verificacion con cache caliente y con cache soltada (bloque 65536, mediana de 5)
+releer_disco=0 t_verif=0.3698
+releer_disco=1 t_verif=0.4209
+
+d) lectura del origen: cache soltada vs caliente (bloque 65536, mediana de 5)
+origen_frio t_copia=0.4590 | origen_caliente t_copia=0.4015
+
+e) bucle de lectura/escritura sin hash ni fsync (mediana de 5)
+bloque=    4096 t_bucle=0.1136 mib_s=1127
+bloque=   65536 t_bucle=0.0460 mib_s=2784
+bloque= 1048576 t_bucle=0.0500 mib_s=2561
+
+f) sha256 de 128 MiB en memoria: mediana=0.3435 mib_s=373
